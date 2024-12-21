@@ -32,18 +32,20 @@
 			<p class="fw-light">Powered by <a href="https://vidsrc.me/">VidSrc</a></p>
 		</div>
 		<script>
-			const searchParams = new URLSearchParams(window.location.search);
-			if (searchParams.has('q')) return document.getElementById('results').innerHTML = "To perform a search, append the q parameter to the URL and specify your search term as its value. Currently, there is no value specified for the q parameter, so no movies or TV shows have been displayed.";
-			const query = encodeURIComponent(searchParams.get('q'));
-			const resultLink = `https://v2.sg.media-imdb.com/suggests/h/${query}.json`;
-			try {
-				const response = await fetch(URL);
-				if (!response.ok) return document.getElementById('results').innerHTML = `There was an error with searching. Here is the response status: ${response.status}`;
-				const json = await response.json();
-				console.log(json);
-			} catch (error) {
-				console.error(error.message);
-			}
+			(() => {
+				const searchParams = new URLSearchParams(window.location.search);
+				if (searchParams.has('q')) return document.getElementById('results').innerHTML = "To perform a search, append the q parameter to the URL and specify your search term as its value. Currently, there is no value specified for the q parameter, so no movies or TV shows have been displayed.";
+				const query = encodeURIComponent(searchParams.get('q'));
+				const resultLink = `https://v2.sg.media-imdb.com/suggests/h/${query}.json`;
+				try {
+					const response = await fetch(URL);
+					if (!response.ok) return document.getElementById('results').innerHTML = `There was an error with searching. Here is the response status: ${response.status}`;
+					const json = await response.json();
+					console.log(json);
+				} catch (error) {
+					console.error(error.message);
+				}
+			})();
 		</script>
 	</body>
 </html>
