@@ -39,13 +39,13 @@
 				const link = `https://corsproxy.io/?url=https://v2.sg.media-imdb.com/suggests/h/${query}.json`;
 				try {
 					const response = await fetch(link);
-					console.log(response)
+					console.log(await response)
 					console.log('response done')
-					console.log(response.body)
+					console.log(await response.body)
 					console.log('response body done')
-					console.log(response.json())
+					console.log(await response.json())
 					console.log('response json done')
-					console.log(response.text())
+					console.log(await response.text())
 					console.log('response text done')
 					if (!response.ok) return document.getElementById('results').innerHTML = `There was an error with searching. Here is the response status: ${response.status}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`;
 					const json = await response.substring(response.indexOf('(') + 1, response.lastIndexOf(')')).json();
