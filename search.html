@@ -37,7 +37,7 @@
 				if (!searchParams.has('q')) return document.getElementById('results').innerHTML = "To perform a search, append the q parameter to the URL and specify your search term as its value. Currently, there is no value specified for the q parameter, so no movies or TV shows have been displayed.";
 				const query = encodeURIComponent(searchParams.get('q'));
 				const link = `https://corsproxy.io/?url=https://v2.sg.media-imdb.com/suggests/h/${query}.json`;
-				const data = {};
+				let data = {};
 				try {
 					const response = await fetch(link);
 					if (!response.ok) return document.getElementById('results').innerHTML = `There was an error with searching. Here is the response status: ${response.status}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`;
