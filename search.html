@@ -5,18 +5,10 @@
 		<title>PortCine</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<link href="./bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-		<style>
-			.center {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%, -50%);
-			}
-		</style>
 	</head>
 	<body class="text-bg-dark">
 		<div class="container center">
-			<h2>PortCine - Search Results</h2>
+			<h2 class="my-5">PortCine - Search Results</h2>
 			<form action="./search">
 				<div class="input-group mb-3">
 					<input type="text" class="form-control" placeholder="Search for movies or TV shows" aria-label="Search for movies or TV shows" aria-describedby="search-input" name="q" id="q">
@@ -43,7 +35,11 @@
 					jsonString = dt.substring(dt.indexOf('(') + 1, dt.lastIndexOf(')'));
 					data = JSON.parse(jsonString);
 					$('#q').html(data.q);
-					
+					$('#results').html(`<div class="row row-cols-5" id="grid"></div>`);
+					for (let entry in data.d) {
+						$('#grid').append(`img#${entry.id}.col`);
+						$(`#${entry.id}`).attr('src', entry.i[0]);
+					}
 				})
 				.fail((er) => {
 					$('#results').html(`There was an error with searching. Here is the error:<br>${er}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`);
