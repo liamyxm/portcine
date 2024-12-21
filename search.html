@@ -40,10 +40,12 @@
 					for (let entryIndex in data.d) {
 						let entry = data.d[entryIndex];
 						console.log(entry)
-						$('#grid').append(`img#${entry.id}.col`);
-						$(`#${entry.id}`).attr('src', entry.i[0]);
-					}
-				})
+						$('#grid').append(`<img id="${entry.id}" class="col" href="${entry.i[0]}">`);
+						$('#${entry.id}'.on('click', () => {
+							window.location.href = `./viewinfo?i=${entry.id}`;
+						};
+					};
+				});
 				.fail((er) => {
 					$('#results').html(`There was an error with searching. Here is the error:<br>${er}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`);
 				});
