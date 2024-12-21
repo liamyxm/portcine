@@ -37,7 +37,8 @@
 					console.log(data)
 					$('#q').html(data.q);
 					$('#results').html(`<div class="row row-cols-5" id="grid"></div>`);
-					for (let entry in data.d) {
+					for (let entryIndex in data.d) {
+						let entry = data.d[entryIndex];
 						console.log(entry)
 						$('#grid').append(`img#${entry.id}.col`);
 						$(`#${entry.id}`).attr('src', entry.i[0]);
