@@ -41,9 +41,9 @@
 						let entry = data.d[entryIndex];
 						console.log(entry)
 						$('#grid').append(`<img id="${entry.id}" class="col" href="${entry.i[0]}">`);
-						$('#${entry.id}'.on('click', () => {
+						$('#${entry.id}').on('click', () => {
 							window.location.href = `./viewinfo?i=${entry.id}`;
-						};
+						});
 					};
 				});
 				.fail((er) => {
