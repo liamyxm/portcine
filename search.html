@@ -34,6 +34,7 @@
 				$.get(link, (dt, st) => {
 					jsonString = dt.substring(dt.indexOf('(') + 1, dt.lastIndexOf(')'));
 					data = JSON.parse(jsonString);
+					console.log(data)
 					$('#q').html(data.q);
 					$('#results').html(`<div class="row row-cols-5" id="grid"></div>`);
 					for (let entry in data.d) {
