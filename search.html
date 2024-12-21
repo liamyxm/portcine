@@ -32,7 +32,7 @@
 			<p class="fw-light">Powered by <a href="https://vidsrc.me/">VidSrc</a></p>
 		</div>
 		<script>
-			(() => {
+			(async () => {
 				const searchParams = new URLSearchParams(window.location.search);
 				if (searchParams.has('q')) return document.getElementById('results').innerHTML = "To perform a search, append the q parameter to the URL and specify your search term as its value. Currently, there is no value specified for the q parameter, so no movies or TV shows have been displayed.";
 				const query = encodeURIComponent(searchParams.get('q'));
