@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>PortCine</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<link href="./bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 		<style>
 			.center {
@@ -37,29 +38,14 @@
 				if (!searchParams.has('q')) return document.getElementById('results').innerHTML = "To perform a search, append the q parameter to the URL and specify your search term as its value. Currently, there is no value specified for the q parameter, so no movies or TV shows have been displayed.";
 				const query = encodeURIComponent(searchParams.get('q'));
 				const link = `https://corsproxy.io/?url=https://v2.sg.media-imdb.com/suggests/h/${query}.json`;
-				// If you are looking through the source code and the corsproxy.io looks suspicious, it's not.
-				// Here's why:
-				// CORS is a browser security rule that blocks web pages from making requests to a different domain (or server) than the one the page was loaded from.
-				// In this instance, I am trying to fetch data from media-imdb.com, but the browser is blocking the request, unless media-imdb.com explicitly allows it (which it won't).
-				// So corsproxy.io acts as a middleman.
-				// Here, I send a request to the proxy server corsproxy.io instead of the original link at media-imdb.com
-				// The proxy forwards that request to media-imdb.com
-				// The proxy fetches the data then sends it back here using headers that trick the browser into thinking the data came from the same domain.
-				// This bypasses CORS.
-				// But it still might not be 100% safe. I myself as the creator don't host corsproxy so I can't verify whether or not it is definitely safe.
-				// Please avoid sending sensitive information by typing them into the search bar and searching it.
-				// Thanks for reading all of this
 				let data = {};
-				try {
-					const response = await fetch(link);
-					if (!response.ok) return document.getElementById('results').innerHTML = `There was an error with searching. Here is the response status: ${response.status}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`;
-					const rawData = await response.text();
-					const jsonString = rawData.substring(rawData.indexOf('(') + 1, rawData.lastIndexOf(')'));
+				$.get(link, (dt, st) => {
+					jsonString = dt..substring(dt.indexOf('(') + 1, dt.lastIndexOf(')'));
 					data = JSON.parse(jsonString);
-				} catch (error) {
-					return document.getElementById('results').innerHTML = `There was an error with searching. Here is the error: ${error}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`;
-				}
-				console.log(data)
+				})
+				.fail((er) => {
+					$('#results').html(`There was an error with searching. Here is the error:<br>${er}.<br><br>If this keeps happening, try the following steps.<ol><li>Go to the IMDb website and search for your movie or TV series</li><li>Click on your movie or TV series</li><li>In the link, highlight the identifier between the /link/ and the next / in the URL. It should look something like this: tt0123456</li><li>Copy the identifier and paste it into the search here</li></ol>`);
+				})
 			})();
 		</script>
 	</body>
