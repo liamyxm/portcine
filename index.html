@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>PortCine</title>
+		<link href="./bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+		<style>
+			.center {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="center">
+			<h1 style="width:80%">PortCine</h1>
+			<p>Your port into unlimited cinema</p>
+			<br>
+			<form action="./search">
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-input" name="q" id="q">
+					<button class="btn btn-outline-success" type="submit" id="search-input" value="submit">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+							<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+						</svg>
+					</button>
+				</div>
+			</form>
+			<br>
+			<p>Created by yuxyym</p>
+			<p class="fw-light">Powered by <a href="https://vidsrc.me/">VidSrc</a></p>
+		</div>
+	</body>
+</html>
